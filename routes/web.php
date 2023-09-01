@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\PurchaseController;
 use App\Models\Student;
+use App\Models\Purchased_course;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +20,14 @@ use App\Models\Student;
 //Route::get('/', function () {
  // return view('index');
 //};
+Route::get('/',function(){
+    return view('index');
+});
 Route::get('/register',[StudentController::class,'index'])->name('register.index');
 Route::post('/register',[StudentController::class,'store'])->name('store-customer');
+Route::get('/purchase',[PurchaseController::class,'index'])->name('index-purchase');
+Route::post('/purchase',[PurchaseController::class,'store'])->name('store-purchase');
+Route::get('/student/view',[StudentController::class,'list'])->name('student-view');
+
+Route::get('/purchase/view',[PurchaseController::class,'view'])->name('purchase.view');
+

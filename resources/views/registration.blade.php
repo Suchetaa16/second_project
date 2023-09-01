@@ -10,6 +10,33 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+  <div class="container-fluid bg-dark">
+        <div class="container">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">Scordemy</a>
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                   aria-expanded="false" aria-label="Toggle navigation">
+                   <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{url('/')}}" style="color:white"><span class="sr-only">Home</span></a>
+                        </li>
+                        <li class="nav-item">
+                             <a class="nav-link" href="{{url('/register')}}" style="color:white">Customer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('/purchase')}}" style="color:white">Purchases</a>
+                        </li>
+                        <li class="nav-item">
+                             <a class="nav-link" href="{{url('/student/view')}}" style="color:white">Student Information</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
     <form action="{{route('store-customer')}}" method="post">
     @csrf
     <div class="container">
@@ -75,7 +102,7 @@
           <label >Course Category</label>
           <select name="course_cat" class="form-control">
             @foreach($data as $row)
-               <option value="{{$row->id}}">{{$row->course_cat}}</option>
+               <option value="{{$row->course_cat}}">{{$row->course_cat}}</option>
             @endforeach
           </select>
           <span class="text-danger">
