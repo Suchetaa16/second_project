@@ -24,7 +24,7 @@
                             <a class="nav-link" href="{{url('/')}}" style="color:white"><span class="sr-only">Home</span></a>
                         </li>
                         <li class="nav-item">
-                             <a class="nav-link" href="{{url('/register')}}" style="color:white">Customer</a>
+                             <a class="nav-link" href="{{url('/register')}}" style="color:white">Student</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/purchase')}}" style="color:white">Purchases</a>
@@ -37,7 +37,7 @@
             </nav>
         </div>
     </div>
-    <form action="{{route('store-customer')}}" method="post">
+    <form action="{{$url}}" method="post">
     @csrf
     <div class="container">
         <h1 class="text-center">Student Registration</h1>

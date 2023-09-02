@@ -24,7 +24,7 @@
                             <a class="nav-link" href="{{url('/')}}" style="color:white"><span class="sr-only">Home</span></a>
                         </li>
                         <li class="nav-item">
-                             <a class="nav-link" href="{{url('/register')}}" style="color:white">Customer</a>
+                             <a class="nav-link" href="{{url('/register')}}" style="color:white">Student</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/purchase')}}" style="color:white">purchases</a>
@@ -41,16 +41,16 @@
         <form action="" class="col-9">
         <div class="form-group">
             <input type="search" name="search" id="search" class="form-control"
-             placeholder="Search something here">
+             placeholder="Search by Name or Date" value="{{$search}}">
         </div>
         <button class="btn btn-primary d-inline-block m-2">Search</button>
+        <a href="{{url('/purchase/view')}}">
+        <button class="btn btn-primary d-inline-block m-2" type="button">Reset</button>
+        </a>
         </form>
     <a href="{{route('index-purchase')}}">
           <button class="btn btn-primary d-inline-block m-2 float-right">Add</button>
     </a>
-    <a href="">
-          <button class="btn btn-primary d-inline-block m-2 float-right" type="denger">Delete </button>
-        </a>
     <table class="table">
         <thead>
             <tr>
@@ -69,6 +69,10 @@
                 <td>{{ $purchased_course->purchase_date }}</td>
                 <td>{{ $purchased_course->items }}</td>
                 <td>{{ $purchased_course->qty }}</td>
+                <td>
+                    <a href="{{route('purchase.delete',['id'=>$purchased_course->id])}}"><button class="btn btn-danger">Delete</button></a>
+                    <button class="btn btn-primary">Edit</button>
+                </td>
             </tr>
             @endforeach
         </tbody>

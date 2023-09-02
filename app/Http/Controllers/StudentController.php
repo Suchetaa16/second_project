@@ -8,23 +8,21 @@ use App\Models\Category;
 
 class StudentController extends Controller
 {
+  
   public function index()
   {
-    $data=Category::all();
+  
+
     
+    $data=Category::all();
     return view('registration',['data'=>$data]);
   }
-  function list(Request $request){
-    $search=$request['search'] ?? "";
-    if($search!=""){
-      $students=Student::where("name",'=',$search)->get();
+  public function show()
+  {
 
-    }else{
-      $students=$Student::all();
-    }
-    $students = Student::all();
-    $data = compact('students');
-    return view('student-view')->with($data);
+    $url=url('/register');
+    $data=compact('url');
+    return view('registration')->with($data);
   }
 
   public function store(Request $request)
@@ -61,7 +59,35 @@ class StudentController extends Controller
     $student->address=$request['address'];
     $student->password=md5($request['password']);
     $student->save();
-    return redirect('/register');
+    return redirect('/student/view');
 
+  }
+  function list(Request $request){
+    $search=$request['search'] ?? "";
+    if($search!=""){
+      $students=Student::where('name','LIKE',"%$search%")->orwhere('email','LIKE',"%$search%")->get();
+
+    }else{
+      $students=Student::all();
+    }
+    $data = compact('students','search');
+    return view('student-view')->with($data);
+  }
+  public function delete($id){
+    $student=Student::find($id);
+    if(!is_null($student)){
+      $student->delete();
+    }
+    return redirect()->back();
+  }
+  public function edit($id){
+    $student=Student::find($id);
+    if(is_null($student)){
+      return redirect('registration');
+    }else{
+      $url=url('student/update') ."/". $id;
+      $data=compact('student','url');
+    return view('registration')->with($data);
+    }
   }
 }

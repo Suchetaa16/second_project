@@ -42,6 +42,19 @@
     <div class="container">
         <h1 class="text-center">Purchase Details</h1>
         <div class="form-group">
+          <label >Student Name</label>
+          <select name="name" class="form-control">
+            @foreach($data as $row)
+               <option value="{{$row->name}}">{{$row->name}}</option>
+            @endforeach
+          </select>
+          <span class="text-danger">
+               @error('stu_name')
+                 {{$message}}
+               @enderror
+           </span>
+        </div>
+        <div class="form-group">
           <label for="">Transaction Id</label>
           <input type="text" name="txn_id" id="" class="form-control" value="{{old('txn_id')}}">
            <span class="text-danger">
@@ -50,21 +63,6 @@
                @enderror
           </span>
         </div>
-
-        <div class="form-group">
-          <label >Student Name</label>
-          <select name="name" class="form-control">
-            @foreach($data as $row)
-               <option value="{{$row->id}}">{{$row->name}}</option>
-            @endforeach
-          </select>
-          <span class="text-danger">
-               @error('course_cat')
-                 {{$message}}
-               @enderror
-           </span>
-        </div>
-
         <div class="form-group">
           <label for="">Date of Purchase</label>
           <input type="text" name="purchase_date" id="" class="form-control" value="{{old('purchase_date')}}" >

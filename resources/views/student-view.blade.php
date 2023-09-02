@@ -24,7 +24,7 @@
                             <a class="nav-link" href="{{url('/')}}" style="color:white"><span class="sr-only">Home</span></a>
                         </li>
                         <li class="nav-item">
-                             <a class="nav-link" href="{{url('/register')}}" style="color:white">Customer</a>
+                             <a class="nav-link" href="{{url('/register')}}" style="color:white">Student</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/purchase')}}" style="color:white">purchases</a>
@@ -38,11 +38,18 @@
         </div>
     </div>
    <div class="container">
+   <form action="" class="col-9">
+        <div class="form-group">
+            <input type="search" name="search" id="search" class="form-control"
+             placeholder="Search by name or email" value="{{$search}}">
+        </div>
+        <button class="btn btn-primary d-inline-block m-2">Search</button>
+        <a href="{{url('/student/view')}}">
+        <button class="btn btn-primary d-inline-block m-2" type="button">Reset</button>
+        </a>
+        </form>
         <a href="{{route('register.index')}}">
           <button class="btn btn-primary d-inline-block m-2 float-right">Add </button>
-        </a>
-        <a href="">
-          <button class="btn btn-primary d-inline-block m-2 float-right">Delete </button>
         </a>
         <a href="{{route('purchase.view')}}">
           <button class="btn btn-primary d-inline-block m-2 float-right">Purchase Data</button>
@@ -60,6 +67,7 @@
                 <th>State</th>
                 <th>Country</th>
                 <th>Address</th>
+                <th>Action</th>
                 
             </tr>
         </thead>
@@ -76,6 +84,10 @@
                 <td>{{ $student->state }}</td>
                 <td>{{ $student->country }}</td>
                 <td>{{ $student->address }}</td>
+                <td>
+                    <a href="{{route('student-delete',['id'=>$student->id])}}"><button class="btn btn-danger">Delete</button></a>
+                    <a href="{{route('student-edit',['id'=>$student->id])}}"><button class="btn btn-primary">Edit</button></a>
+                </td>
             </tr>
             @endforeach
         </tbody>
