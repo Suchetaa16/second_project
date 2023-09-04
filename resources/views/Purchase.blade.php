@@ -24,7 +24,7 @@
                             <a class="nav-link" href="{{url('/')}}" style="color:white"><span class="sr-only">Home</span></a>
                         </li>
                         <li class="nav-item">
-                             <a class="nav-link" href="{{url('/register')}}" style="color:white">Customer</a>
+                             <a class="nav-link" href="{{url('/register')}}" style="color:white">Student</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/purchase')}}" style="color:white">Purchases</a>
@@ -37,14 +37,15 @@
             </nav>
         </div>
     </div>
-    <form action="{{route('store-purchase')}}" method="post">
+    <form action="{{$url}}" method="post">
     @csrf
     <div class="container">
-        <h1 class="text-center">Purchase Details</h1>
+        <h1 class="text-center">{{$title}} Purchase</h1>
         <div class="form-group">
           <label >Student Name</label>
-          <select name="name" class="form-control">
-            @foreach($data as $row)
+          {{-- //Dusra method aur ek hai, aap ye bhi kr skte hai --}}
+          <select name="name" class="form-control" value="{{isset($purchased_course) && $purchased_course->stu_name}}">
+            @foreach($nme as $row)
                <option value="{{$row->name}}">{{$row->name}}</option>
             @endforeach
           </select>
@@ -56,7 +57,7 @@
         </div>
         <div class="form-group">
           <label for="">Transaction Id</label>
-          <input type="text" name="txn_id" id="" class="form-control" value="{{old('txn_id')}}">
+          <input type="text" name="txn_id" id="" class="form-control" value="{{isset($purchased_course) && $purchased_course->txn_id}}">
            <span class="text-danger">
                @error('txn_id')
                   {{$message}}
@@ -65,7 +66,7 @@
         </div>
         <div class="form-group">
           <label for="">Date of Purchase</label>
-          <input type="text" name="purchase_date" id="" class="form-control" value="{{old('purchase_date')}}" >
+          <input type="text" name="purchase_date" id="" class="form-control" value="{{isset($purchased_course) && $purchased_course->purchase_date}}" >
           <span class="text-danger">
                @error('purchase_date')
                  {{$message}}
@@ -74,7 +75,7 @@
         </div>
         <div class="form-group">
           <label for="">Purchased Items</label>
-          <input type="text" name="items" id="" class="form-control">
+          <input type="text" name="items" id="" class="form-control" value="{{isset($purchased_course) && $purchased_course->items}}">
           <span class="text-danger">
                @error('items')
                  {{$message}}
@@ -83,7 +84,7 @@
         </div>
         <div class="form-group">
           <label for="">Quantity</label>
-          <input type="text" name="qty" id="" class="form-control">
+          <input type="text" name="qty" id="" class="form-control" value="{{isset($purchased_course) && $purchased_course->qty}}">
           <span class="text-danger">
                @error('quantity')
                  {{$message}}

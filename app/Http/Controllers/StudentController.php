@@ -11,17 +11,12 @@ class StudentController extends Controller
   
   public function index()
   {
-  
-
     
-    $data=Category::all();
-    return view('registration',['data'=>$data]);
-  }
-  public function show()
-  {
-
+  
+    $cat=Category::all();
+    $title = "Create";
     $url=url('/register');
-    $data=compact('url');
+    $data=compact('url', 'cat', 'title');
     return view('registration')->with($data);
   }
 
@@ -82,12 +77,31 @@ class StudentController extends Controller
   }
   public function edit($id){
     $student=Student::find($id);
+    $cat=Category::all();
+    $title = "Update";
     if(is_null($student)){
-      return redirect('registration');
+      return redirect('/student/view');
     }else{
-      $url=url('student/update') ."/". $id;
-      $data=compact('student','url');
+      $url=url('/student/update') ."/". $id;
+      $data=compact('student','url', 'cat', 'title');
     return view('registration')->with($data);
     }
+  }
+  public function update($id, Request $request){
+    $student=Student::find($id);
+    $student->name=$request['name'];
+    $student->email=$request['email'];
+    $student->dob=$request['dob'];
+    $student->gender=$request['gender'];
+    $student->class=$request['class'];
+    $student->course_cat=$request['course_cat'];
+    $student->phone_no=$request['phone_no'];
+    $student->state=$request['state'];
+    $student->country=$request['country'];
+    $student->address=$request['address'];
+    $student->password=md5($request['password']);
+    $student->save();
+    return redirect('/student/view');
+
   }
 }

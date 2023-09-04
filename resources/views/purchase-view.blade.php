@@ -71,7 +71,7 @@
                 <td>{{ $purchased_course->qty }}</td>
                 <td>
                     <a href="{{route('purchase.delete',['id'=>$purchased_course->id])}}"><button class="btn btn-danger">Delete</button></a>
-                    <button class="btn btn-primary">Edit</button>
+                    <a href="{{route('purchase-edit',['id'=>$purchased_course->id])}}"><button class="btn btn-primary">Edit</button></a>
                 </td>
             </tr>
             @endforeach

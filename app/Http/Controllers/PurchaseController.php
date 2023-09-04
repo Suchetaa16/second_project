@@ -11,9 +11,12 @@ class PurchaseController extends Controller
 {
   public function index()
   {
-    $data=Student::all();
+    $nme=Student::all();
     
-    return view('purchase',['data'=>$data]);
+    $title = "Create";
+    $url=url('/purchase');
+    $data=compact('url', 'nme', 'title');
+    return view('purchase')->with($data);
 
   }
 
@@ -60,5 +63,31 @@ class PurchaseController extends Controller
     }
     return redirect()->back();
   }
+  public function edit($id){
+    $purchased_course=Purchased_course::find($id);
+    $nme=Student::all();
+    $title = "Update";
+    if(is_null($purchased_course)){
+      return redirect('/purchase/view');
+    }else{
+      $url=url('/purchase/update') ."/". $id;
+      $data=compact('purchased_course','url', 'nme', 'title');
+    return view('purchase')->with($data);
+    }
+  }
+  public function update($id, Request $request){
+
+    $purchased_course=Purchased_course::find($id);
+    $purchased_course->stu_name=$request['name'];
+    //$purchase->id=$request['id'];                                                                                                                   
+    $purchased_course->txn_id=$request['txn_id'];
+    $purchased_course->purchase_date=$request['purchase_date'];
+    $purchased_course->items=$request['items'];
+    $purchased_course->qty=$request['qty'];
+    $purchased_course->save();
+    return redirect('/purchase/view');
+
+  }
+
 
 }
