@@ -32,6 +32,7 @@
                         <li class="nav-item">
                              <a class="nav-link" href="{{url('/student/view')}}" style="color:white">Student Information</a>
                         </li>
+                        
                     </ul>
                 </div>
             </nav>

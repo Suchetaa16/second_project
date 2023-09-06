@@ -14,7 +14,7 @@
   <div class="container-fluid bg-dark">
   @if (!isset($student))
     @php
-      $student['name'] = $student['email'] = $student['dob'] = $student['gender'] = $student['class'] = $student['course_cat'] = $student['phone_no'] = $student['state'] = $student['country'] = $student['address'] = "";
+      $student['name'] = $student['user_name'] = $student['email'] = $student['dob'] = $student['gender'] = $student['class'] = $student['course_cat'] = $student['phone_no'] = $student['state'] = $student['country'] = $student['address'] = "";
     @endphp
   @endif
         <div class="container">
@@ -43,11 +43,18 @@
             </nav>
         </div>
     </div>
+
+    <h4 class="d-inline-block m-2 float-right">Already Signed-Up?
+      <a href="{{route('index-student')}}"><button class="btn btn-primary d-inline-block m float-right" >Login</button></a>
+      </h4>
+
     <form action="{{$url}}" method="post">
     @csrf
-    <div class="container">
+    <div class="container mt-4 card p-3 bg-white">
+    
         <h1 class="text-center">{{$title}} Student</h1>
-        <div class="form-group">
+        <div class="row">
+        <div class="form-group col-md-6 required">
           <label for="">Name</label>
           <input type="text" name="name" id="" class="form-control" value="{{$student['name']}}"/>
            <span class="text-danger">
@@ -57,7 +64,7 @@
           </span>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-6 required">
           <label for="">Email</label>
           <input type="email" name="email" id="" class="form-control" value="{{$student['email']}}"/>
           <span class="text-danger">
@@ -66,7 +73,9 @@
                @enderror
           </span>
         </div>
-        <div class="form-group">
+        </div>
+        <div class="row">
+        <div class="form-group col-md-6 required">
           <label for="">DOB</label>
           <input type="text" name="dob" id="" class="form-control" value="{{$student['dob']}}"/>
           <span class="text-danger">
@@ -75,9 +84,20 @@
                @enderror
            </span>
         </div>
-        <div class="form-group">
-          <div class="form-group col-md-6">
-            <label for="gender" class= "col-md-4 col-form-label">Gender</label>
+        <div class="form-group col-md-6 required">
+          <label for="">Class</label>
+          <input type="text" name="class" id="" class="form-control" value="{{$student['class']}}"/>
+          <span class="text-danger">
+               @error('class')
+                 {{$message}}
+               @enderror
+           </span>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="form-group col-md-6 required">
+            <label for="gender" class= "d-inline-block col-md-4 col-form-label">Gender</label>
                 <div class="form-check form-check-inline" >
                     <input class="form-check-input" type="radio" name="gender" value="m" {{$student['gender']=="male" ? "checked" : "empty"}}/>
                         <label class="form-check-label" for="male">Male</label>
@@ -95,18 +115,10 @@
                  {{$message}}
                @enderror
            </span>
+          </div>
         </div>
-      </div>
-        <div class="form-group">
-          <label for="">Class</label>
-          <input type="text" name="class" id="" class="form-control" value="{{$student['class']}}"/>
-          <span class="text-danger">
-               @error('class')
-                 {{$message}}
-               @enderror
-           </span>
-        </div>
-        <div class="form-group">
+      <div class="row">
+        <div class="form-group col-md-6 required">
           <label >Course Category</label>
           <select name="course_cat" class="form-control" value="{{$student['course_cat']}}">
             @foreach($cat as $row)
@@ -119,7 +131,7 @@
                @enderror
            </span>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6 required">
           <label for="">Phone No</label>
           <input type="text" name="phone_no" id="" class="form-control" value="{{$student['phone_no']}}"/>
           <span class="text-danger">
@@ -128,7 +140,9 @@
                @enderror
            </span>
         </div>
-        <div class="form-group">
+      </div>
+        <div class="row">
+        <div class="form-group col-md-6 required">
           <label for="">State</label>
           <input type="text" name="state" id="" class="form-control" value="{{$student['state']}}"/>
           <span class="text-danger">
@@ -137,7 +151,7 @@
                @enderror
            </span>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6 required">
           <label for="">Country</label>
           <input type="text" name="country" id="" class="form-control" value="{{$student['country']}}"/>
           <span class="text-danger">
@@ -146,9 +160,10 @@
                @enderror
            </span>
         </div>
+      </div>
 
-
-        <div class="form-group">
+        <div class="row">
+        <div class="form-group col-md-15">
           <label for="">Address</label>
           <input type="text" name="address" id="" class="form-control" value="{{$student['address']}}"/>
           <span class="text-danger">
@@ -157,9 +172,10 @@
                @enderror
            </span>
         </div>
+      </div>
 
-
-        <div class="form-group">
+        <div class="row">
+        <div class="form-group col-md-6 required">
           <label for="">Password</label>
           <input type="password" name="password" id="" class="form-control"/>
           <span class="text-danger">
@@ -168,7 +184,7 @@
                @enderror
           </span>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6 required">
           <label for="">Confirm Password</label>
           <input type="text" name="confirm_password" id="" class="form-control"/>
           <span class="text-danger">
@@ -177,6 +193,7 @@
                @enderror
            </span>
         </div>
+      </div>
         <button class="btn btn-primary">
          Submit
         </button>

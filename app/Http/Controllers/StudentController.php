@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
 use App\Models\Category;
 
 class StudentController extends Controller
 {
   
+  
   public function index()
   {
+
     
   
     $cat=Category::all();
@@ -27,9 +30,10 @@ class StudentController extends Controller
       [
 
         'name'=>'required',
+        'user_name'=>'required',
         'email'=>'required|email',
         'dob'=>'required',
-        'gender'=>'required|in:male,female',
+        //'gender'=>'required|in:male,female',
         'class'=>'required',
         'course_cat'=>'required',
         'phone_no'=>'required',
@@ -43,6 +47,7 @@ class StudentController extends Controller
     );
     $student=new Student;
     $student->name=$request['name'];
+    $student->user_name=$request['user_name'];
     $student->email=$request['email'];
     $student->dob=$request['dob'];
     $student->gender=$request['gender'];
@@ -54,7 +59,12 @@ class StudentController extends Controller
     $student->address=$request['address'];
     $student->password=md5($request['password']);
     $student->save();
-    return redirect('/student/view');
+
+    if(Auth::attempt($request->only('email','password')))
+    {
+      return redirect('/student/view');
+    }
+    return redirect('registration')->withError('error');
 
   }
   function list(Request $request){
