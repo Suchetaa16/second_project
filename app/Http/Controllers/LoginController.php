@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Hash;
+use Session;
 use App\Models\Student;
 use App\Models\Category;
 use App\Models\Purchased_course;
@@ -21,23 +22,28 @@ class LoginController extends Controller
         'email'=>'required',
         'password'=>'required',
      ]);
+     
+    $student=Student::where('email','=',$request->email)->first();
+    if($student){
+      if(md5($request->password) == $student->password){
+        $request->session()->put('loginId',$student->id);
+        return redirect('/index');
+      }else{
+        return back()->with('fail','Invalid Password');
+      }
 
-     //Yahan pe Auth use na krke, Direct values ko check kr lijiye, agar user logged in hota hai to cookies mein store kr dijiye 
+    }else{
+      return back()->with('fail','This email is invalid');
 
-     //ok sir try krti hu, Okay, Class aaj hi krna hai ya kal?sir kal krte hai okay phir
-
-
-     if(Auth::attempt($request->only('email','password')))
-    {
-      return redirect('/');
     }
-    return redirect('login')->withError('Invalid email or password');
+     
 
   }
 
   public function logout(){
-    Session::flush();
-    Auth::logout();
-    return redirect(route('view-home'));
+    if(Session::has('loginId')){
+       Session::pull('loginId');
+    return redirect('/');
+    }
   }
 }

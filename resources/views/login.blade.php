@@ -17,13 +17,13 @@
                 <div class="card form-holder">
                     <div class="card-body">
                         <h1>Login</h1>
-                        @if (Session::has('error'))
-                            <p class="text-denger">{{Session::get('error')}}</p>
-                        @endif
-                        @if (Session::has('success'))
-                            <p class="text-success">{{Session::get('success')}}</p>
-                        @endif
                         <form action="{{url('/login')}}" method="post">
+                            @if(Session::has('success'))
+                            <div class="alert alert-success">{{Session::get('success')}}</div>
+                            @endif
+                            @if(Session::has('fail'))
+                            <div class="alert alert-danger">{{Session::get('fail')}}</div>
+                            @endif
                             @csrf
                                 <div class="row mb-3">
                                   <label for="email" class="col-md-4 col-form-label text-md-end">User Name</label>
@@ -63,6 +63,7 @@
                                         <button type="submit" class="btn btn-primary" value="login">Login</button>
                                     </div>
                                 </div>
+                                <a href="{{url('/register')}}" class="col-md-6">New User!!Register Here</a>
                         </form>
                     </div>
                 </div>

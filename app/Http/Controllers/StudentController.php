@@ -30,10 +30,9 @@ class StudentController extends Controller
       [
 
         'name'=>'required',
-        'user_name'=>'required',
+        // 'user_name'=>'required', // Ye kya hai
         'email'=>'required|email',
         'dob'=>'required',
-        //'gender'=>'required|in:male,female',
         'class'=>'required',
         'course_cat'=>'required',
         'phone_no'=>'required',
@@ -45,9 +44,11 @@ class StudentController extends Controller
       ]
 
     );
+
+
     $student=new Student;
     $student->name=$request['name'];
-    $student->user_name=$request['user_name'];
+    // $student->user_name=$request['user_name'];
     $student->email=$request['email'];
     $student->dob=$request['dob'];
     $student->gender=$request['gender'];
@@ -59,12 +60,12 @@ class StudentController extends Controller
     $student->address=$request['address'];
     $student->password=md5($request['password']);
     $student->save();
-
-    if(Auth::attempt($request->only('email','password')))
-    {
-      return redirect('/student/view');
+    if($student){
+      return back()->with('success','you have registered successfully');
+    }else{
+      return back()->with('fail','Something Wrong');
     }
-    return redirect('registration')->withError('error');
+    return redirect('/student/view');
 
   }
   function list(Request $request){

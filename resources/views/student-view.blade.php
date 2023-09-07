@@ -20,17 +20,20 @@
                 </button>
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{url('/')}}" style="color:white"><span class="sr-only">Home</span></a>
-                        </li>
-                        <li class="nav-item">
-                             <a class="nav-link" href="{{url('/register')}}" style="color:white">Student</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/purchase')}}" style="color:white">purchases</a>
                         </li>
                         <li class="nav-item">
                              <a class="nav-link" href="{{url('/student/view')}}" style="color:white">Student Information</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link menu-end" href="{{url('/register')}}" style="color:white">Register</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link menu-end" href="{{url('/login')}}" style="color:white">Login</a>
+                        </li>
+                        <li class="nav-item active">
+                           <a class="nav-link" href="{{url('/logout')}}" style="color:white">logout</a>
                         </li>
                         
                     </ul>
