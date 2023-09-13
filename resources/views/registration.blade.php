@@ -29,7 +29,7 @@
       <div class="alert alert-danger">{{Session::get('fail')}}</div>
       @endif
     @csrf
-    <div class="container mt-4 card p-3 bg-white">
+    <div class="container mt-4 card p-3 bg-blue">
     
         <h1 class="text-center">{{$title}} Student</h1>
         <div class="row">
@@ -142,7 +142,7 @@
       </div>
 
         <div class="row">
-        <div class="form-group col-md-15">
+        <div class="form-group">
           <label for="">Address</label>
           <input type="text" name="address" id="" class="form-control" value="{{$student['address']}}"/>
           <span class="text-danger">

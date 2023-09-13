@@ -40,5 +40,6 @@
             </nav>
         </div>
     </div>
-  </body>
+    <img src="images/images.png" alt="" style="background-size:cover;height:800px;width:1300px;padding-top:80px,text-align:center;">
+</body>
 </html>
